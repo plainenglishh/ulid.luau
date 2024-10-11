@@ -1,0 +1,10 @@
+{
+  "luau-lsp.require.mode": "relativeToFile",
+  "luau-lsp.require.directoryAliases": {
+    "@lune/": "~/.lune/.typedefs/0.8.6/",
+    "@zcore/": "~/.zune/typedefs/core"
+  },
+  "luau-lsp.types.definitionFiles": [
+    "C:/Users/plain//.zune/typedefs/global/zune.d.luau",
+  ]
+}
