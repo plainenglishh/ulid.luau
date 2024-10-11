@@ -28,7 +28,7 @@ A list of generator options is as follows:-
 |Option|Type|Default|Description|
 |-|-|-|-|
 |monotonic|`boolean`|`false`|Whether to use a monotonic generator, currently unsupported|
-|dependencies|`{ <br>prng: (min: number, max: number) -> number,<br>time: () -> number<br>}`|Runtime Dependent|Dictionary of functions to provide dependent functions|
+|dependencies|`{ prng: (min: number, max: number) -> number, time: () -> number }`|Runtime Dependent|Dictionary of functions to provide dependent functions|
 |allow_insecure|`boolean`|`false`|Whether to suppress `insecure` errors|
 |allow_imprecise|`boolean`|`false`|Whether to suppress `imprecise` errors|
 
