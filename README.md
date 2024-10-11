@@ -9,7 +9,7 @@ Simply copy and paste the contents of `lib/init.luau` into your project.
 This project *should* work in the following runtimes:-
 
 |Runtime|Supported|Has detectable CSPRNG|Has detectable ms-precise time function|
-|-|-|-|
+|-|-|-|-|
 |Roblox|✅|❌|✅|
 |[Lune](https://github.com/lune-org/lune)|✅|❌|✅|
 |[Zune](https://github.com/Scythe-Technology/Zune)|✅|✅|✅|
