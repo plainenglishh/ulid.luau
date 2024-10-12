@@ -13,7 +13,7 @@ This project *should* work in the following runtimes:-
 |Roblox|✅|❌|✅|
 |[Lune](https://github.com/lune-org/lune)|✅|❌|✅|
 |[Zune](https://github.com/Scythe-Technology/Zune)|✅|✅|✅|
-|Pure Luau|✅|✅❌|❌|
+|Pure Luau|✅|❌|❌|
 
 ## Usage
 
