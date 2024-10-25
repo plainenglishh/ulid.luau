@@ -145,6 +145,50 @@ local function get_dependencies(allow_insecure: boolean, allow_imprecise: boolea
 end
 
 --[=[
+    Replaces a character in a string
+
+    @param str string -- The string to replace
+    @param idx number -- The index of the replaced character
+    @param replacement string -- The new character
+    @return string -- The final string
+]=]
+local function replace_char(str: string, idx: number, replacement: string): string
+    return string.sub(str, 1, idx - 1) .. replacement .. string.sub(str, idx + 1);
+end
+
+--[=[
+    Increases the final character in a base32 string.
+
+    @param str string -- The base32 string to increment
+    @return string -- The incremented base32 string
+]=]
+local function increment_base32(str: string): string
+    local done;
+    local idx = #str;
+
+    while not done and idx - 1 >= 0 do
+        
+        local char = string.sub(str, idx, idx);
+        local char_idx = table.find(ENCODING, char);
+        
+        if not char_idx then
+            error("string not base32");
+        end
+    
+        if char_idx == ENCODING_LEN - 1 then
+            str = replace_char(str, idx, ENCODING[1]);
+
+            idx -= 1;
+            continue;
+        end
+
+        done = replace_char(str, idx, ENCODING[char_idx + 1]);
+    end
+
+    return done;
+end
+
+--[=[
     Generates a ULID
 
     @yields
@@ -235,7 +279,21 @@ function ulid.generator(options: PartialGeneratorOptions?): typeof(__generator)
     end
 
     if _options.monotonic then
-        error("monotonic generators are unsupported at this time");
+        local last_time = 0;
+        local last_random;
+
+        return function(time: number?)
+            local _time = time or now();
+        
+            if _time <= last_time then
+                last_random = increment_base32(last_random);
+                return encode_time(last_time) .. last_random;
+            else
+                last_time = _time;
+                last_random = encode_random();
+                return encode_time(_time) .. last_random;
+            end
+        end
     else
         return function(time: number?)
             return encode_time(time or now()) .. encode_random();
